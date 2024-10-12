@@ -14,27 +14,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 
-const Page = () => {
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    const audioFile = new Audio('/music/Sleepwalker.mp3');
-    setAudio(audioFile);
-  }, []);
-
-  const handlePlayAudio = () => {
-    if (audio) {
-      audio.play();
-    }
-  };
-
-  return (
-    <div>
-      <button onClick={handlePlayAudio}>Play Audio</button>
-    </div>
-  );
-};
-
 
 
 // Existing dictionaries (keep these as they are in the original code)
@@ -868,7 +847,7 @@ const banglishToBanglaMap: { [key: string]: string } = {
   'j': 'জ', 'jh': 'ঝ', 'n': 'ন', 't': 'ত', 'th': 'থ', 'd': 'দ', 'dh': 'ধ',
   'p': 'প', 'f': 'ফ', 'b': 'ব', 'bh': 'ভ', 'm': 'ম', 'z': 'য', 'r': 'র',
   'l': 'ল', 'sh': 'শ', 's': 'স', 'h': 'হ', 'rr': 'ড়', 'rh': 'ঢ়', 'y': 'য়',
-  'tt': 'ৎ', 'ng': 'ং', ':': 'ঃ', 'nng': 'ঁ', '0': '০', '1': '১', '2': '২',
+  'tt': 'ৎ', '': 'ং', ':': 'ঃ', 'nng': 'ঁ', '0': '০', '1': '১', '2': '২',
   '3': '৩', '4': '৪', '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
 };
 
@@ -880,10 +859,10 @@ const banglishVowels: { [key: string]: string } = {
 const banglishConjuncts: { [key: string]: string } = {
   'kk': 'ক্ক', 'kT': 'ক্ট', 'kt': 'ক্ত', 'kw': 'ক্ব', 'km': 'ক্ম', 'ky': 'ক্য',
   'kr': 'ক্র', 'kl': 'ক্ল', 'kkh': 'ক্ষ', 'kkhn': 'ক্ষ্ণ', 'kkhm': 'ক্ষ্ম', 'khy': 'খ্য',
-  'gn': 'গ্ণ', 'gdh': 'গ্ধ', 'gn': 'গ্ন', 'gm': 'গ্ম', 'gy': 'গ্য', 'gr': 'গ্র',
+  'gn': 'গ্ণ', 'gdh': 'গ্ধ', '': 'গ্ন', 'gm': 'গ্ম', 'gy': 'গ্য', 'gr': 'গ্র',
   'gl': 'গ্ল', 'ghn': 'ঘ্ন', 'ghy': 'ঘ্য', 'nk': 'ঙ্ক', 'ng': 'ঙ্গ', 'cch': 'চ্চ',
-  'cch': 'চ্ছ', 'cn': 'চ্ঞ', 'cy': 'চ্য', 'jj': 'জ্জ', 'jjh': 'জ্ঝ', 'gg': 'জ্ঞ',
-  'jy': 'জ্য', 'nch': 'ঞ্চ', 'nch': 'ঞ্ছ', 'nj': 'ঞ্জ', 'TT': 'ট্ট', 'DD': 'ড্ড',
+  '': 'চ্ছ', 'cn': 'চ্ঞ', 'cy': 'চ্য', 'jj': 'জ্জ', 'jjh': 'জ্ঝ', 'gg': 'জ্ঞ',
+  'jy': 'জ্য', 'nch': 'ঞ্চ', '': 'ঞ্ছ', 'nj': 'ঞ্জ', 'TT': 'ট্ট', 'DD': 'ড্ড',
   'nT': 'ণ্ট', 'nTh': 'ণ্ঠ', 'nD': 'ণ্ড', 'tt': 'ত্ত', 'tth': 'ত্থ', 'tn': 'ত্ন',
   'tm': 'ত্ম', 'ty': 'ত্য', 'tr': 'ত্র', 'thy': 'থ্য', 'dd': 'দ্দ', 'ddh': 'দ্ধ',
   'dw': 'দ্ব', 'dm': 'দ্ম', 'dy': 'দ্য', 'dhn': 'ধ্ন', 'dhm': 'ধ্ম', 'dhy': 'ধ্য',
@@ -894,15 +873,15 @@ const banglishConjuncts: { [key: string]: string } = {
   'mn': 'ম্ন', 'mp': 'ম্প', 'mf': 'ম্ফ', 'mb': 'ম্ব', 'mbh': 'ম্ভ', 'mm': 'ম্ম',
   'my': 'ম্য', 'yy': 'য্য', 'rk': 'র্ক', 'rg': 'র্গ', 'rgh': 'র্ঘ', 'rch': 'র্চ',
   'rj': 'র্জ', 'rn': 'র্ণ', 'rt': 'র্ত', 'rth': 'র্থ', 'rd': 'র্দ', 'rdh': 'র্ধ',
-  'rn': 'র্ন', 'rp': 'র্প', 'rf': 'র্ফ', 'rb': 'র্ব', 'rbh': 'র্ভ', 'rm': 'র্ম',
-  'ry': 'র্য', 'rl': 'র্ল', 'rsh': 'র্শ', 'rsh': 'র্ষ', 'rs': 'র্স', 'rh': 'র্হ',
+  '': 'র্ন', 'rp': 'র্প', 'rf': 'র্ফ', 'rb': 'র্ব', 'rbh': 'র্ভ', 'rm': 'র্ম',
+  'ry': 'র্য', 'rl': 'র্ল', 'rsh': 'র্শ', '': 'র্ষ', 'rs': 'র্স', 'rh': 'র্হ',
   'lk': 'ল্ক', 'lg': 'ল্গ', 'lT': 'ল্ট', 'lD': 'ল্ড', 'lp': 'ল্প', 'lf': 'ল্ফ',
   'lb': 'ল্ব', 'lm': 'ল্ম', 'ly': 'ল্য', 'shch': 'শ্চ', 'shn': 'শ্ন', 'shw': 'শ্ব',
   'shm': 'শ্ম', 'shy': 'শ্য', 'shr': 'শ্র', 'shl': 'শ্ল', 'shk': 'ষ্ক', 'shT': 'ষ্ট',
-  'shTh': 'ষ্ঠ', 'shn': 'ষ্ণ', 'shp': 'ষ্প', 'shf': 'ষ্ফ', 'shm': 'ষ্ম', 'shy': 'ষ্য',
+  'shTh': 'ষ্ঠ', '': 'ষ্ণ', 'shp': 'ষ্প', 'shf': 'ষ্ফ', 'shb': 'ষ্ব', '': 'ষ্ম', '': 'ষ্য',
   'sk': 'স্ক', 'skh': 'স্খ', 'sT': 'স্ট', 'st': 'স্ত', 'sth': 'স্থ', 'sn': 'স্ন',
   'sp': 'স্প', 'sf': 'স্ফ', 'sw': 'স্ব', 'sm': 'স্ম', 'sy': 'স্য', 'sr': 'স্র',
-  'sl': 'স্ল', 'hn': 'হ্ণ', 'hn': 'হ্ন', 'hw': 'হ্ব', 'hm': 'হ্ম', 'hy': 'হ্য',
+  'sl': 'স্ল', 'hn': 'হ্ণ', '': 'হ্ন', 'hw': 'হ্ব', 'hm': 'হ্ম', 'hy': 'হ্য',
   'hr': 'হ্র', 'hl': 'হ্ল'
 };
 
